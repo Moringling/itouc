@@ -1,0 +1,3 @@
+*.pyc
+oucite/db.sqlite3
+.vscode
