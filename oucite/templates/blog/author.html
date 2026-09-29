@@ -1,0 +1,36 @@
+{# blog/templates/blog/author.html #}
+{% extends "blog/base.html" %}
+
+{% block title %}{{ author.nickname }} 的文章 · 社团博客{% endblock %}
+
+{% block content %}
+  <h1>{{ author.nickname }}</h1>
+
+  <p class="meta">
+    加入于 {{ author.joined_at|date:"Y-m-d" }}　
+    共 {{ articles|length }} 篇文章
+  </p>
+
+  {% if author.bio %}
+    <p>{{ author.bio|linebreaksbr }}</p>
+  {% endif %}
+
+  <hr>
+
+  {% for article in articles %}
+    <article>
+      <h2>
+        <a href="{% url 'blog:article_detail' article.pk %}">{{ article.title }}</a>
+        {% if not article.is_published %}<span class="draft">草稿</span>{% endif %}
+      </h2>
+
+      <p class="meta">
+        发布于 {{ article.created_at|date:"Y-m-d H:i" }}
+        　{{ article.comment_count }} 条评论
+        　阅读 {{ article.views }}
+      </p>
+    </article>
+  {% empty %}
+    <p class="empty">这位作者还没有发表文章</p>
+  {% endfor %}
+{% endblock %}

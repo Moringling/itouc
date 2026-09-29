@@ -1,0 +1,35 @@
+{# blog/templates/blog/base.html #}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}社团博客{% endblock %}</title>
+  <style>
+    body { max-width: 760px; margin: 2rem auto; padding: 0 1rem; color: #222;
+           font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+           line-height: 1.7; }
+    a { color: #0b5fa5; }
+    .meta { color: #777; font-size: .9rem; }
+    .draft { color: #b45309; border: 1px solid #b45309; border-radius: 3px;
+             padding: 0 .3rem; font-size: .8rem; vertical-align: middle; }
+    .empty { color: #999; }
+    hr { border: 0; border-top: 1px solid #eee; margin: 1.5rem 0; }
+    article + article { border-top: 1px solid #eee; padding-top: 1.5rem; }
+    .comment + .comment { border-top: 1px dashed #eee; }
+    textarea { width: 100%; box-sizing: border-box; font: inherit; padding: .5rem; }
+    footer { margin-top: 3rem; color: #aaa; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav><a href="{% url 'blog:index' %}">← 首页</a></nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>社团招新系统 · Django 练习</footer>
+</body>
+</html>

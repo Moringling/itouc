@@ -1,0 +1,50 @@
+{# blog/templates/blog/detail.html #}
+{% extends "blog/base.html" %}
+
+{% block title %}{{ article.title }} · 社团博客{% endblock %}
+
+{% block content %}
+  <article>
+    <h1>
+      {{ article.title }}
+      {% if not article.is_published %}<span class="draft">草稿</span>{% endif %}
+    </h1>
+
+    <p class="meta">
+      作者：<a href="{% url 'blog:author_articles' article.author.nickname %}">{{ article.author.nickname }}</a>
+      　发布于 {{ article.created_at|date:"Y-m-d H:i" }}
+      　阅读 {{ article.views }}
+    </p>
+
+    <div class="content">{{ article.content|linebreaks }}</div>
+  </article>
+
+  <hr>
+
+  {# 用 with 缓存住 queryset，让“计数”和“循环”共用同一次查询 #}
+  {% with comments=article.comments.all %}
+    <section id="comments">
+      <h2>评论（{{ comments|length }}）</h2>
+
+      {% for comment in comments %}
+        <div class="comment">
+          <p class="meta">{{ comment.commenter.nickname }}</p>
+          <p>{{ comment.content|linebreaksbr }}</p>
+        </div>
+      {% empty %}
+        <p class="empty">还没有评论，来抢沙发～</p>
+      {% endfor %}
+    </section>
+  {% endwith %}
+
+  <hr>
+
+  <section>
+    <h2>发表评论</h2>
+    <form method="post" action="{% url 'blog:add_comment' article.pk %}">
+      {% csrf_token %}
+      <textarea name="content" rows="4" placeholder="说点什么……" required></textarea>
+      <p><button type="submit">发表</button></p>
+    </form>
+  </section>
+{% endblock %}
