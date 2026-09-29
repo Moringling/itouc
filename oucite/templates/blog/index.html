@@ -5,6 +5,7 @@
 
 {% block content %}
   <h1>全部文章</h1>
+  <p><a href="{% url 'blog:article_create' %}">＋ 发表文章</a></p>
 
   {% for article in articles %}
     <article>

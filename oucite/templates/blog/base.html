@@ -19,6 +19,9 @@
     .comment + .comment { border-top: 1px dashed #eee; }
     textarea { width: 100%; box-sizing: border-box; font: inherit; padding: .5rem; }
     footer { margin-top: 3rem; color: #aaa; font-size: .85rem; }
+    .messages { list-style: none; padding: .6rem 1rem; background: #e8f5e9;
+        border: 1px solid #a5d6a7; border-radius: 4px; }
+    .errorlist { color: #c00; list-style: none; padding-left: 0; font-size: .9rem; }
   </style>
 </head>
 <body>
@@ -27,6 +30,14 @@
   </header>
 
   <main>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     {% block content %}{% endblock %}
   </main>
 
