@@ -13,7 +13,7 @@ def index(request : HttpRequest) -> HttpResponse:
 def article_detail(request : HttpRequest, pk : int) -> HttpResponse:
     article = get_object_or_404(Article, pk = pk)
     Article.objects.filter(pk=pk).update(views=F("views")+1)
-    return render(request, "blog.detail.html", {"article": article})
+    return render(request, "blog/detail.html", {"article": article})
 
 def add_comment(request: HttpRequest, pk : int) -> HttpResponse:
     article = get_object_or_404(Article, pk=pk)
