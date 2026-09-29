@@ -12,7 +12,7 @@
       <h2><a href="{% url 'blog:article_detail' article.pk %}">{{ article.title }}</a></h2>
 
       <p class="meta">
-        作者：<a href="{% url 'blog:author_articles' article.author.nickname %}">{{ article.author.nickname }}</a>
+        作者：<a href="{% url 'blog:author_articles' article.author.username %}">{{ article.author.display_name }}</a>
         　发布于 {{ article.created_at|date:"Y-m-d H:i" }}
         　阅读 {{ article.views }}
       </p>

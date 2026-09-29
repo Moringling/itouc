@@ -1,10 +1,10 @@
 {# blog/templates/blog/author.html #}
 {% extends "blog/base.html" %}
 
-{% block title %}{{ author.nickname }} 的文章 · 社团博客{% endblock %}
+{% block title %}{{ author.display_name }} 的文章 · 社团博客{% endblock %}
 
 {% block content %}
-  <h1>{{ author.nickname }}</h1>
+  <h1>{{ author.display_name }}</h1>
 
   <p class="meta">
     加入于 {{ author.joined_at|date:"Y-m-d" }}　
