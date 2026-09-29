@@ -2,7 +2,7 @@ from django.db.models import F
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
-from ..blog.models import Article, Member, Comment
+from blog.models import Article, Member, Comment
 
 def index(request : HttpRequest) -> HttpResponse:
     articles = Article.objects.filter(is_published = True)
@@ -15,7 +15,7 @@ def article_detail(request : HttpRequest, pk : int) -> HttpResponse:
 
 def add_comment(request: HttpRequest, pk : int) -> HttpResponse:
     article = get_object_or_404(Article, pk=pk)
-    if request.method is "POST":
+    if request.method == "POST":
         content = request.POST.get("content", "")
         commenter = Member.objects.first() # TODO implement login
         if commenter is None:
