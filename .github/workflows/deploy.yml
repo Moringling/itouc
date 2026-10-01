@@ -37,7 +37,7 @@ jobs:
           set -euo pipefail
           commit="$1"
 
-          cd /home/deploy/oucite
+          cd /var/www/oucite
           git fetch --tags origin
           git reset --hard "$commit"
 
