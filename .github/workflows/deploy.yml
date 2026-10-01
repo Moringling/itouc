@@ -41,9 +41,10 @@ jobs:
           git fetch --tags origin
           git reset --hard "$commit"
 
-          .venv/bin/pip install -r requirements.txt
-          .venv/bin/python manage.py migrate --noinput
-          .venv/bin/python manage.py collectstatic --noinput
+          cd /var/www/oucite/oucite
+          /var/www/oucite/.venv/bin/pip install -r requirements.txt
+          /var/www/oucite/.venv/bin/python manage.py makemigrations --noinput
+          /var/www/oucite/.venv/bin/python manage.py migrate --noinput
 
           sudo systemctl restart oucite.service
           REMOTE
